@@ -1,42 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Loader() {
-  const [progress, setProgress] = useState(0)
   const [dots, setDots] = useState(".")
 
   useEffect(() => {
-    const progressInterval = setInterval(() => {
-      setProgress(prev => (prev < 100 ? prev + 1 : 100))
-    }, 30)
-
-    const dotInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setDots(prev => (prev.length >= 3 ? "." : prev + "."))
     }, 500)
-
-    return () => {
-      clearInterval(progressInterval)
-      clearInterval(dotInterval)
-    }
+    return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black text-cyan-400 font-mono transition-all">
-      <div className="animate-pulse w-3 h-3 mb-6 rounded-full bg-cyan-400 shadow-cyan-400 shadow-md"></div>
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-black text-cyan-400 font-mono z-50 px-4">
+      {/* Pulse Dot */}
+      <div className="w-4 h-4 bg-cyan-400 rounded-full animate-pulse shadow-lg mb-6" />
 
-      <h1 className="text-xl md:text-2xl tracking-widest mb-6">
-        Booting AI Interface{dots}
+      {/* Booting Text */}
+      <h1 className="text-lg md:text-xl tracking-widest mb-8 text-center">
+        Booting AI System{dots}
       </h1>
 
-      <div className="w-[80%] max-w-md bg-gray-800 rounded-full h-4 overflow-hidden border border-cyan-500 shadow-md">
-        <div
-          className="h-full bg-cyan-400 transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
+      {/* Infinite Animated Bar */}
+      <div className="relative w-full max-w-md h-3 bg-gray-800 rounded-full overflow-hidden border border-cyan-500 shadow-cyan-400/30 shadow-sm">
+        <div className="absolute w-1/3 h-full bg-cyan-400 animate-loaderMove rounded-full" />
       </div>
-
-      <p className="text-sm text-cyan-300 mt-4 tracking-wide">
-        Initializing... {progress}%
-      </p>
     </div>
   )
 }
