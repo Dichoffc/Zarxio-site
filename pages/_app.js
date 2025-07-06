@@ -1,4 +1,3 @@
-/// pages/_app.js
 import { useEffect, useState } from 'react'
 import '../styles/globals.css'
 
@@ -7,30 +6,29 @@ export default function App({ Component, pageProps }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    // Simulasi loading awal (2 detik)
     const timer = setTimeout(() => {
       setLoading(false)
-      // Simulasi user login
       setUser({ username: 'xiotense', email: 'xiotense@gmail.com' })
-    }, 2000)
-
+    }, 2500)
     return () => clearTimeout(timer)
   }, [])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-cyan-400 text-xl font-mono animate-pulse">
-        🚀 ZARXIO System Booting...
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-cyan-400 font-mono animate-fade">
+        <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-xl glitch">Booting ZARXIO OS...</p>
+        <div className="scanner" />
       </div>
     )
   }
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full text-sm text-gray-400 bg-gray-900 px-4 py-2 z-50 shadow-md">
-        🔐 Logged in as <span className="text-white font-bold">@{user?.username}</span> ({user?.email})
+      <div className="fixed top-0 left-0 w-full bg-gray-900 text-gray-300 px-4 py-2 text-sm z-50 shadow font-mono">
+        🔐 Welcome, <strong className="text-white">@{user?.username}</strong> ({user?.email})
       </div>
-      <div className="pt-12">
+      <div className="pt-12 transition-all duration-500 ease-in-out animate-fade">
         <Component {...pageProps} />
       </div>
     </>
