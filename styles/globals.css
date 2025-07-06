@@ -46,8 +46,44 @@ body {
   margin-top: 16px;
   border-radius: 9999px;
 }
-
 @keyframes scanMove {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Background Bintang */
+.stars {
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat;
+  z-index: -1;
+  opacity: 0.08;
+}
+
+/* Efek Kode Matrix */
+.matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 0, 0.1) 0px,
+    rgba(0, 255, 0, 0.1) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  background-size: 100% 200%;
+  animation: matrixMove 5s linear infinite;
+  z-index: -1;
+  opacity: 0.1;
+}
+@keyframes matrixMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
 }
