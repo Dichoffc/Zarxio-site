@@ -1,31 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Loader() {
   const [progress, setProgress] = useState(0)
+  const [dots, setDots] = useState(".")
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => (prev >= 100 ? 100 : prev + 1.5))
-    }, 25)
-    return () => clearInterval(interval)
+    const progressInterval = setInterval(() => {
+      setProgress(prev => (prev < 100 ? prev + 1 : 100))
+    }, 30)
+
+    const dotInterval = setInterval(() => {
+      setDots(prev => (prev.length >= 3 ? "." : prev + "."))
+    }, 500)
+
+    return () => {
+      clearInterval(progressInterval)
+      clearInterval(dotInterval)
+    }
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black font-mono text-cyan-400 px-6">
-      <h1 className="text-3xl font-bold tracking-widest text-cyan-400 mb-8 glitch">WELCOME</h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-black text-cyan-400 font-mono transition-all">
+      <div className="animate-pulse w-3 h-3 mb-6 rounded-full bg-cyan-400 shadow-cyan-400 shadow-md"></div>
 
-      <div className="w-full max-w-sm bg-gray-900 border border-cyan-500 rounded-xl h-5 overflow-hidden mb-3 shadow-lg shadow-cyan-500/20">
+      <h1 className="text-xl md:text-2xl tracking-widest mb-6">
+        Booting AI Interface{dots}
+      </h1>
+
+      <div className="w-[80%] max-w-md bg-gray-800 rounded-full h-4 overflow-hidden border border-cyan-500 shadow-md">
         <div
-          className="h-full bg-cyan-400 transition-all duration-200 ease-in-out"
-          style={{
-            width: `${progress}%`,
-            boxShadow: '0 0 6px cyan',
-          }}
-        ></div>
+          className="h-full bg-cyan-400 transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
-      <p className="text-sm text-cyan-300 tracking-wide">
-        Loading AI System... {Math.round(progress)}%
+      <p className="text-sm text-cyan-300 mt-4 tracking-wide">
+        Initializing... {progress}%
       </p>
     </div>
   )
