@@ -1,34 +1,91 @@
 import Head from 'next/head'
-import Link from 'next/link'
 
 export default function Home() {
+  const user = {
+    username: 'xiotense',
+    email: 'xiotense@gmail.com',
+    usageStats: {
+      downloads: 128,
+      promosSent: 45,
+      activeSince: 'Feb 2024'
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white font-mono">
+    <>
       <Head>
-        <title>ZARXIO</title>
-        <meta name="description" content="Zarxio - All-in-One Social Media Tool" />
+        <title>ZARXIO – Futuristic Toolbox</title>
+        <meta name="description" content="Zarxio - AI downloader & jasa digital futuristik" />
       </Head>
-      <header className="p-6 flex justify-between items-center bg-opacity-30 bg-gray-900 backdrop-blur-md shadow-md">
-        <h1 className="text-3xl font-bold tracking-widest text-cyan-400">ZARXIO</h1>
-        <nav className="space-x-6 text-sm">
-          <Link href="/download">Downloader</Link>
-          <Link href="/products">Produk</Link>
-          <Link href="/promo">Promosi</Link>
-        </nav>
-      </header>
 
-      <main className="flex flex-col items-center justify-center text-center px-4 mt-24">
-        <h2 className="text-4xl md:text-6xl font-bold mb-4">Social Media Toolbox of the Future</h2>
-        <p className="text-gray-300 max-w-xl mb-6">Zarxio hadir sebagai solusi AI downloader & jasa digital yang futuristik, cepat, dan handal.</p>
-        <div className="flex space-x-4">
-          <Link href="/download" className="bg-cyan-500 hover:bg-cyan-400 px-6 py-3 rounded-xl font-semibold transition">Coba Downloader</Link>
-          <Link href="/products" className="bg-gray-800 border border-cyan-500 px-6 py-3 rounded-xl font-semibold transition">Lihat Produk</Link>
+      {/* Background */}
+      <div className="stars" />
+      <div className="matrix" />
+
+      <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white px-6 py-12 font-mono relative z-10">
+        {/* Header */}
+        <header className="flex items-center justify-between mb-12 border-b border-gray-700 pb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-cyan-400 tracking-wider">ZARXIO</h1>
+          <nav className="space-x-6 text-sm md:text-base">
+            <a href="/download" className="hover:text-cyan-400 transition">Downloader</a>
+            <a href="/products" className="hover:text-cyan-400 transition">Produk</a>
+            <a href="/promo" className="hover:text-cyan-400 transition">Promosi</a>
+          </nav>
+        </header>
+
+        {/* User Info */}
+        <div className="flex items-center gap-4 mb-8">
+          <img
+            src="https://api.dicebear.com/7.x/bottts/svg?seed=zarxio"
+            alt="AI Avatar"
+            className="w-16 h-16 rounded-full border-2 border-cyan-400 shadow"
+          />
+          <div>
+            <p className="font-semibold text-lg">@{user.username}</p>
+            <p className="text-sm text-gray-400">{user.email}</p>
+          </div>
         </div>
-      </main>
 
-      <footer className="mt-32 text-center text-gray-500 text-sm p-4">
-        © 2025 ZARXIO. Built for creators & hustlers.
-      </footer>
-    </div>
+        {/* Statistik */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12 text-sm text-gray-300">
+          <div className="bg-gray-800 p-4 rounded-lg border border-cyan-600">
+            <p className="text-cyan-400 text-xl font-bold">{user.usageStats.downloads}</p>
+            <p>Total Downloads</p>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg border border-cyan-600">
+            <p className="text-cyan-400 text-xl font-bold">{user.usageStats.promosSent}</p>
+            <p>Promosi Terkirim</p>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg border border-cyan-600">
+            <p className="text-cyan-400 text-xl font-bold">{user.usageStats.activeSince}</p>
+            <p>Aktif Sejak</p>
+          </div>
+        </div>
+
+        {/* Hero Section */}
+        <section className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+            Social Media Toolbox of the Future
+          </h2>
+          <p className="text-gray-400 max-w-xl mx-auto mb-8">
+            Zarxio hadir sebagai solusi AI downloader & jasa digital yang futuristik, cepat, dan handal.
+          </p>
+
+          <div className="flex justify-center gap-4">
+            <a href="/download" className="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-2 rounded-full shadow-lg transition font-semibold">
+              🚀 Coba Downloader
+            </a>
+            <a href="/products" className="border border-cyan-400 hover:bg-cyan-900 text-cyan-400 px-6 py-2 rounded-full transition font-semibold">
+              📦 Lihat Produk
+            </a>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-20 text-sm text-center text-gray-500">
+          © 2025 <span className="text-cyan-500 font-semibold">ZARXIO</span>. Built for creators & hustlers.
+        </footer>
+      </main>
+    </>
   )
 }
