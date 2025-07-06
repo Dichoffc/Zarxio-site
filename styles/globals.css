@@ -64,7 +64,15 @@ body {
   opacity: 0.1;
 }
 
-@keyframes matrixMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
+@keyframes scan-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scan-bar {
+  animation: scan-bar 1.2s linear infinite;
 }
