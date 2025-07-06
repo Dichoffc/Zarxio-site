@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Loader() {
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev < 100 ? prev + 2 : 100))
+    }, 30)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black text-cyan-400">
-      <div className="text-center space-y-6">
+    <div className="flex items-center justify-center min-h-screen bg-black text-cyan-400 px-4">
+      <div className="text-center space-y-6 w-full max-w-sm">
         {/* Avatar AI */}
         <div className="relative w-24 h-24 mx-auto">
           <img
@@ -17,14 +26,17 @@ export default function Loader() {
           </div>
         </div>
 
-        {/* Scan Bar */}
-        <div className="w-48 h-1 bg-cyan-800 rounded-full overflow-hidden mx-auto">
-          <div className="w-full h-full animate-scan-bar bg-gradient-to-r from-cyan-300 via-cyan-500 to-cyan-300"></div>
+        {/* Bar Loading */}
+        <div className="w-full h-4 bg-gray-800 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-cyan-500 transition-all duration-300 ease-out"
+            style={{ width: `${progress}%` }}
+          />
         </div>
 
         {/* Teks Loading */}
-        <p className="text-xl font-semibold animate-pulse tracking-wide">
-          Initializing AI Systems...
+        <p className="text-lg font-semibold tracking-wide">
+          Loading AI System... {progress}%
         </p>
       </div>
     </div>
