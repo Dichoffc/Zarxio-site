@@ -1,44 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Loader() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prev) => (prev < 100 ? prev + 2 : 100))
-    }, 30)
+      setProgress(prev => (prev >= 100 ? 100 : prev + 1.5))
+    }, 25)
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black text-cyan-400 px-4">
-      <div className="text-center space-y-6 w-full max-w-sm">
-        {/* Avatar AI */}
-        <div className="relative w-24 h-24 mx-auto">
-          <img
-            src="https://api.dicebear.com/7.x/bottts/svg?seed=zarxio"
-            alt="AI Avatar"
-            className="w-full h-full rounded-full border-2 border-cyan-400 shadow"
-          />
-          {/* Efek Ping AI */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-4 h-4 bg-cyan-400 rounded-full animate-ping"></div>
-          </div>
-        </div>
+    <div className="flex flex-col items-center justify-center h-screen bg-black font-mono text-cyan-400 px-6">
+      <h1 className="text-3xl font-bold tracking-widest text-cyan-400 mb-8 glitch">WELCOME</h1>
 
-        {/* Bar Loading */}
-        <div className="w-full h-4 bg-gray-800 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-cyan-500 transition-all duration-300 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        {/* Teks Loading */}
-        <p className="text-lg font-semibold tracking-wide">
-          Loading AI System... {progress}%
-        </p>
+      <div className="w-full max-w-sm bg-gray-900 border border-cyan-500 rounded-xl h-5 overflow-hidden mb-3 shadow-lg shadow-cyan-500/20">
+        <div
+          className="h-full bg-cyan-400 transition-all duration-200 ease-in-out"
+          style={{
+            width: `${progress}%`,
+            boxShadow: '0 0 6px cyan',
+          }}
+        ></div>
       </div>
+
+      <p className="text-sm text-cyan-300 tracking-wide">
+        Loading AI System... {Math.round(progress)}%
+      </p>
     </div>
   )
 }
